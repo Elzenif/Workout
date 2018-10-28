@@ -6,12 +6,10 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.binder.BindingValidationStatus;
 import com.vaadin.flow.data.validator.StringLengthValidator;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.apache.logging.log4j.LogManager;
@@ -20,13 +18,11 @@ import org.gso.gzclpworkout.event.ExerciseUpdateEvent;
 import org.gso.gzclpworkout.model.Category;
 import org.gso.gzclpworkout.model.Exercise;
 import org.gso.gzclpworkout.repository.ExerciseRepository;
+import org.gso.gzclpworkout.utils.FormUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 @UIScope
@@ -79,7 +75,8 @@ public class ExerciseForm extends FormLayout {
     @NotNull
     @Contract(" -> new")
     private HorizontalLayout setupButtons() {
-        Button saveButton = new Button("Save", new Icon(VaadinIcon.CHECK_CIRCLE), e -> checkFormValidity());
+        Button saveButton = new Button("Save", new Icon(VaadinIcon.CHECK_CIRCLE),
+                e -> FormUtils.checkFormValidity(binder, this::save));
         Button deleteButton = new Button("Delete", new Icon(VaadinIcon.CLOSE_CIRCLE), e -> askConfirmationForDeletion());
         Button cancelButton = new Button("Cancel", new Icon(VaadinIcon.CLOSE), e -> cancel());
 
@@ -88,21 +85,6 @@ public class ExerciseForm extends FormLayout {
         cancelButton.getElement().getStyle().set("color", "orange");
 
         return new HorizontalLayout(saveButton, deleteButton, cancelButton);
-    }
-
-    private void checkFormValidity() {
-        if (binder.isValid()) {
-            save();
-        } else {
-            String errorMessage = binder.validate().getFieldValidationStatuses()
-                    .stream()
-                    .filter(BindingValidationStatus::isError)
-                    .map(BindingValidationStatus::getMessage)
-                    .map(Optional::get)
-                    .distinct()
-                    .collect(Collectors.joining(", "));
-            Notification.show(errorMessage, 10000, Notification.Position.TOP_CENTER);
-        }
     }
 
     private void save() {
@@ -115,7 +97,6 @@ public class ExerciseForm extends FormLayout {
 
     private void askConfirmationForDeletion() {
         Dialog dialog = new Dialog();
-
         dialog.setCloseOnEsc(false);
         dialog.setCloseOnOutsideClick(false);
 

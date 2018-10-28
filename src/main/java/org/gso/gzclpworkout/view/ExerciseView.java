@@ -76,25 +76,18 @@ public class ExerciseView extends VerticalLayout implements ApplicationListener<
     @NotNull
     @Contract(" -> new")
     private VerticalLayout setupToolbar() {
-        Button button = setupHomeButton();
+        Button homeButton = new HomeButton();
         TextField textField = setupFilterLayout();
         Button newExerciseButton = setupNewExerciseButton();
-        VerticalLayout layout = new VerticalLayout(button, textField, newExerciseButton);
+        VerticalLayout layout = new VerticalLayout(homeButton, textField, newExerciseButton);
         layout.setHeight("20%");
         return layout;
     }
 
     @Contract(" -> new")
     @NotNull
-    private Button setupHomeButton() {
-        return new Button(new Icon(VaadinIcon.HOME),
-                    e -> getUI().ifPresent(ui -> ui.navigate("")));
-    }
-
-    @Contract(" -> new")
-    @NotNull
     private Button setupNewExerciseButton() {
-        return new Button("Add new exercise", e -> {
+        return new Button("New exercise", e -> {
             grid.asSingleSelect().clear();
             exerciseForm.setExercise(new Exercise());
         });
