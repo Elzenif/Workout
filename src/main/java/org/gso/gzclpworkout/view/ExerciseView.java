@@ -60,7 +60,9 @@ public class ExerciseView extends VerticalLayout implements ApplicationListener<
 
     private HorizontalLayout setupMainLayout() {
         grid.addColumn(Exercise::getName).setHeader("Name");
-        grid.addColumn(e -> e.isPrimary() ? "Primary" : "Secondary").setHeader("Category");
+        grid.addColumn(e -> e.isPrimary() ? "Yes" : "No").setHeader("Is primary");
+        grid.addColumn(Exercise::getCategory).setHeader("Category");
+        grid.addColumn(Exercise::getDescription).setHeader("Description");
         grid.setSizeFull();
 
         grid.asSingleSelect().addValueChangeListener(e -> exerciseForm.setExercise(e.getValue()));

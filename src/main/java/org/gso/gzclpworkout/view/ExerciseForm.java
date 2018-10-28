@@ -1,12 +1,14 @@
 package org.gso.gzclpworkout.view;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.BindingValidationStatus;
@@ -15,6 +17,7 @@ import com.vaadin.flow.spring.annotation.UIScope;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.gso.gzclpworkout.event.ExerciseUpdateEvent;
+import org.gso.gzclpworkout.model.Category;
 import org.gso.gzclpworkout.model.Exercise;
 import org.gso.gzclpworkout.repository.ExerciseRepository;
 import org.jetbrains.annotations.Contract;
@@ -34,7 +37,9 @@ public class ExerciseForm extends FormLayout {
     private final ApplicationEventPublisher eventPublisher;
     private final ExerciseRepository exerciseRepository;
 
-    private TextField name;
+    private TextField name = new TextField();
+    private ComboBox<Category> category = new ComboBox<>();
+    private TextArea description = new TextArea();
 
     private Exercise exercise;
     private Binder<Exercise> binder = new Binder<>(Exercise.class);
@@ -54,14 +59,21 @@ public class ExerciseForm extends FormLayout {
     }
 
     private void setupFields() {
-        name = new TextField();
         name.setPlaceholder("Name...");
-        addFormItem(name, "Name");
-
         name.setRequiredIndicatorVisible(true);
         binder.forField(name)
                 .withValidator(new StringLengthValidator("Please add the exercise name", 1, 255))
                 .bind(Exercise::getName, Exercise::setName);
+        addFormItem(name, "Name");
+
+        category.setItems(Category.values());
+        category.setItemLabelGenerator(Category::name);
+        binder.bind(category, Exercise::getCategory, Exercise::setCategory);
+        addFormItem(category, "Category");
+
+        description.setPlaceholder("Description...");
+        binder.bind(description, Exercise::getDescription, Exercise::setDescription);
+        addFormItem(description, "Description");
     }
 
     @NotNull

@@ -6,11 +6,18 @@ As a user
 I want to create/update/delete exercises
 
 As a user
+I want to assign category to my exercises
+so that I can filter them in my workouts
+
+A a user
+I want to create/update/delete workout
+
+As a user
 I want to see a list of primary exercises
 so that I can update my 5RM
 
 As a user
-I want to see a list of secondary execises
+I want to see a list of secondary exercises
 so that I can update my last session data
 
 As a user
@@ -25,7 +32,7 @@ As a user
 I want to be able to choose the weight/sets/reps of a given exercise of it is the 1st time I'm doing it
 
 As a user
-I want to be able to perform different kind of exerice where the sets/resps pattern is not standard
+I want to be able to perform different kind of exercises where the sets/reps pattern is not standard
 so that it is not always the same (ex drop set, super set...)
 
 As a user
