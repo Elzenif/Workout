@@ -1,0 +1,6 @@
+OK: Add a confirmation dialog when deleting exercise
+
+OK: Add Home Button
+
+OK: Check if form mandatory fields are filled before updating
+

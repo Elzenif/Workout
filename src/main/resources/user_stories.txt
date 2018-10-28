@@ -1,0 +1,88 @@
+As a user 
+I want to have my workout planned for me based on my previous workouts
+so that I know what to do in the gym without thinking too much
+
+As a user
+I want to create/update/delete exercises
+
+As a user
+I want to see a list of primary exercises
+so that I can update my 5RM
+
+As a user
+I want to see a list of secondary execises
+so that I can update my last session data
+
+As a user
+I want to be able to update the current workout
+so that if one exercise is not available (or I don't want to do it), I can choose another (or just a random other)
+
+As a user
+I want to be able to update my workout weight/sets/reps information
+so that it can be taken into account for the next time
+
+As a user
+I want to be able to choose the weight/sets/reps of a given exercise of it is the 1st time I'm doing it
+
+As a user
+I want to be able to perform different kind of exerice where the sets/resps pattern is not standard
+so that it is not always the same (ex drop set, super set...)
+
+As a user
+I want to be able to modify the pattern of my workouts
+
+
+A given workout session should follow a pattern, based on the GSCL-P method
+Patterns should rotate every 4 days
+
+Patterns:
+D1
+	T1: Bench Press
+	T2: Squat
+	T2: Back
+	T3: Triceps
+	T3: Face Pull
+
+D2
+	T1: Deadlift
+	T2: OHP
+	T2: Legs
+	T3: Biceps
+	T3: Shoulders
+
+D3
+	T1: Squat
+	T2: Bench Press
+	T2: Back
+	T3: Triceps
+	T3: Face Pull
+
+D4
+	T1: OHP
+	T2: Deadlift
+	T2: Pecs
+	T3: Biceps
+	T3: Legs
+
+There are two categories of exercices
+	Primary: T1 which alternates with T2
+	Secondary: T2 and T3
+
+For T1 and T2, there are 3 stages of sets/reps. When one stage cannot be fully completed, next time this exercise is done, go to next stage.	
+
+T1
+	5x3+
+	6x2+
+	10x1+
+T2
+	3x10
+	3x8
+	3x6
+T3
+	3x15+ or high volume	
+
+When last stage is failed:
+	T1: Test 5RM -> 85%
+	T2: Take last weight successful on Stage 1 -> add 5-6 kg
+
+For secondary exercises, one should be chosen from a list of exercises whithin the given category
