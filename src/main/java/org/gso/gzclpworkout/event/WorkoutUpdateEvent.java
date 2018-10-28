@@ -2,15 +2,15 @@ package org.gso.gzclpworkout.event;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.gso.gzclpworkout.view.ExerciseForm;
+import org.gso.gzclpworkout.view.WorkoutForm;
 import org.springframework.context.ApplicationEvent;
 
-public class ExerciseUpdateEvent extends ApplicationEvent {
+public class WorkoutUpdateEvent extends ApplicationEvent {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public ExerciseUpdateEvent(ExerciseForm source) {
+    public WorkoutUpdateEvent(WorkoutForm source) {
         super(source);
-        LOGGER.debug(() -> "ExerciseUpdateEvent published");
+        LOGGER.debug(() -> "WorkoutUpdateEvent published");
     }
 }

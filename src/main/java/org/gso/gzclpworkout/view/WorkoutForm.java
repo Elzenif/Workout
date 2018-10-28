@@ -11,9 +11,11 @@ import com.vaadin.flow.data.validator.StringLengthValidator;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.gso.gzclpworkout.event.WorkoutUpdateEvent;
 import org.gso.gzclpworkout.model.Workout;
 import org.gso.gzclpworkout.repository.WorkoutRepository;
 import org.gso.gzclpworkout.utils.FormUtils;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,6 +24,7 @@ public class WorkoutForm extends FormLayout {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
+    private final ApplicationEventPublisher eventPublisher;
     private final WorkoutRepository workoutRepository;
 
     private TextField name = new TextField();
@@ -30,7 +33,8 @@ public class WorkoutForm extends FormLayout {
     private Binder<Workout> binder = new Binder<>(Workout.class);
     private Dialog dialog;
 
-    public WorkoutForm(WorkoutRepository workoutRepository) {
+    public WorkoutForm(ApplicationEventPublisher eventPublisher, WorkoutRepository workoutRepository) {
+        this.eventPublisher = eventPublisher;
         this.workoutRepository = workoutRepository;
     }
 
@@ -62,7 +66,13 @@ public class WorkoutForm extends FormLayout {
         LOGGER.info(() -> "Saving " + workout);
         workoutRepository.save(workout);
         LOGGER.info(() -> "Saved " + workout);
+        publishWorkoutEvent();
         dialog.close();
+    }
+
+    private void publishWorkoutEvent() {
+        LOGGER.debug(() -> "Publishing WorkoutUpdateEvent");
+        eventPublisher.publishEvent(new WorkoutUpdateEvent(this));
     }
 
     private void setWorkout(Workout workout) {

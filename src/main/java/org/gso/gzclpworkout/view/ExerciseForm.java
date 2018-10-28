@@ -91,7 +91,7 @@ public class ExerciseForm extends FormLayout {
         LOGGER.info(() -> "Saving " + exercise);
         exerciseRepository.save(exercise);
         LOGGER.info(() -> "Saved " + exercise);
-        publishUpdateEvent();
+        publishExerciseUpdateEvent();
         setExercise(null);
     }
 
@@ -113,7 +113,7 @@ public class ExerciseForm extends FormLayout {
         LOGGER.info(() -> "Deleting " + exercise);
         exerciseRepository.delete(exercise);
         LOGGER.info(() -> "Deleted " + exercise);
-        publishUpdateEvent();
+        publishExerciseUpdateEvent();
         setExercise(null);
     }
 
@@ -121,8 +121,8 @@ public class ExerciseForm extends FormLayout {
         setExercise(null);
     }
 
-    private void publishUpdateEvent() {
-        LOGGER.debug(() -> "Publishing event");
+    private void publishExerciseUpdateEvent() {
+        LOGGER.debug(() -> "Publishing ExerciseUpdateEvent");
         eventPublisher.publishEvent(new ExerciseUpdateEvent(this));
     }
 

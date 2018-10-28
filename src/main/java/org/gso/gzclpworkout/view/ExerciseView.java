@@ -40,16 +40,16 @@ public class ExerciseView extends VerticalLayout implements ApplicationListener<
         this.exerciseRepository = exerciseRepository;
         this.exerciseForm = exerciseForm;
 
-        printExercises();
+        setup();
     }
 
     @Override
     public void onApplicationEvent(@NotNull ExerciseUpdateEvent event) {
-        LOGGER.debug(() -> "Event Listened");
+        LOGGER.debug(() -> "ExerciseUpdateEvent Listened");
         updateList();
     }
 
-    private void printExercises() {
+    private void setup() {
         VerticalLayout toolbar = setupToolbar();
         HorizontalLayout mainLayout = setupMainLayout();
 
