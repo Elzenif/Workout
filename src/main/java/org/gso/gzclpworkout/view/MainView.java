@@ -14,7 +14,7 @@ public class MainView extends VerticalLayout {
 
     private void addButtons() {
         Button listButton = new Button("Exercises", e -> goTo(ExerciseView.class));
-        Button workoutButton = new Button("Workouts", e -> goTo(WorkoutView.class));
+        Button workoutButton = new Button("Workouts", e -> goTo(WorkoutMainView.class));
         add(listButton, workoutButton);
     }
 

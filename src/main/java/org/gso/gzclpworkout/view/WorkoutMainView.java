@@ -19,7 +19,7 @@ import java.util.List;
 @Route("workouts")
 @Component
 @UIScope
-public class WorkoutView extends VerticalLayout implements ApplicationListener<WorkoutUpdateEvent> {
+public class WorkoutMainView extends VerticalLayout implements ApplicationListener<WorkoutUpdateEvent> {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -28,7 +28,7 @@ public class WorkoutView extends VerticalLayout implements ApplicationListener<W
 
     private final Grid<Workout> grid = new Grid<>();
 
-    public WorkoutView(WorkoutRepository workoutRepository, WorkoutForm workoutForm) {
+    public WorkoutMainView(WorkoutRepository workoutRepository, WorkoutForm workoutForm) {
         this.workoutRepository = workoutRepository;
         this.workoutForm = workoutForm;
 
@@ -46,6 +46,8 @@ public class WorkoutView extends VerticalLayout implements ApplicationListener<W
 
         grid.addColumn(Workout::getName).setHeader("Name");
         grid.setSizeFull();
+
+//        grid.asSingleSelect().addValueChangeListener(e -> );
 
         add(toolbar, grid);
         setHeight("100%");
