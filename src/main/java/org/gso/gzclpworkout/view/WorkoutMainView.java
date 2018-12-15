@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.gso.gzclpworkout.event.WorkoutUpdateEvent;
 import org.gso.gzclpworkout.model.Workout;
 import org.gso.gzclpworkout.repository.WorkoutRepository;
+import org.gso.gzclpworkout.view.buttons.HomeButton;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -47,11 +48,15 @@ public class WorkoutMainView extends VerticalLayout implements ApplicationListen
         grid.addColumn(Workout::getName).setHeader("Name");
         grid.setSizeFull();
 
-//        grid.asSingleSelect().addValueChangeListener(e -> );
+        grid.asSingleSelect().addValueChangeListener(e -> goToWorkout(e.getValue().getId()));
 
         add(toolbar, grid);
         setHeight("100%");
         updateList();
+    }
+
+    private void goToWorkout(Long workoutId) {
+        getUI().ifPresent(ui -> ui.navigate(WorkoutView.class, workoutId));
     }
 
     @NotNull

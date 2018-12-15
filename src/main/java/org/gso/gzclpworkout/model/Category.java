@@ -2,7 +2,7 @@ package org.gso.gzclpworkout.model;
 
 public enum Category {
 
-    PECS,
+    CHEST,
     BACK,
     LEGS,
     SHOULDERS,

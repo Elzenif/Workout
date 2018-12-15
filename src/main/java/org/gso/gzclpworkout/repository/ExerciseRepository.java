@@ -15,7 +15,7 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
 
     @NonNull
     @Override
-    @CacheEvict(value = "allExercises", allEntries = true)
+    @Cacheable("allExercises")
     List<Exercise> findAll();
 
     @Cacheable("allExercises")
@@ -23,11 +23,10 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
 
     @NotNull
     @Override
-    @CacheEvict("allExercises")
-    @CachePut("exercises")
+    @CachePut("allExercises")
     <S extends Exercise> S save(@NotNull S s);
 
     @Override
-    @CacheEvict({"allExercises", "exercises"})
+    @CacheEvict("allExercises")
     void delete(@NotNull Exercise exercise);
 }

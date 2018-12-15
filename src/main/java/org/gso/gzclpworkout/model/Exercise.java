@@ -31,10 +31,6 @@ public class Exercise implements Serializable {
     @NonNull
     @Column(nullable = false, unique = true)
     private String name;
-    /**
-     * A Primary exercise is an alternating T1/T2. Other T2 and T3 are secondary
-     */
-    private boolean isPrimary = false;
     @Enumerated(EnumType.STRING)
     private Category category;
     private String description;

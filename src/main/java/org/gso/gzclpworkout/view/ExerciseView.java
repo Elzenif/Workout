@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import org.gso.gzclpworkout.event.ExerciseUpdateEvent;
 import org.gso.gzclpworkout.model.Exercise;
 import org.gso.gzclpworkout.repository.ExerciseRepository;
+import org.gso.gzclpworkout.view.buttons.HomeButton;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.ApplicationListener;
@@ -60,7 +61,6 @@ public class ExerciseView extends VerticalLayout implements ApplicationListener<
 
     private HorizontalLayout setupMainLayout() {
         grid.addColumn(Exercise::getName).setHeader("Name");
-        grid.addColumn(e -> e.isPrimary() ? "Yes" : "No").setHeader("Is primary");
         grid.addColumn(Exercise::getCategory).setHeader("Category");
         grid.addColumn(Exercise::getDescription).setHeader("Description");
         grid.setSizeFull();

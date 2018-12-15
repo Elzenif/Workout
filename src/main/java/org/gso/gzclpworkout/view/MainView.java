@@ -1,9 +1,9 @@
 package org.gso.gzclpworkout.view;
 
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import org.gso.gzclpworkout.view.buttons.ExerciseButton;
+import org.gso.gzclpworkout.view.buttons.WorkoutButton;
 
 @Route("")
 public class MainView extends VerticalLayout {
@@ -13,12 +13,6 @@ public class MainView extends VerticalLayout {
     }
 
     private void addButtons() {
-        Button listButton = new Button("Exercises", e -> goTo(ExerciseView.class));
-        Button workoutButton = new Button("Workouts", e -> goTo(WorkoutMainView.class));
-        add(listButton, workoutButton);
-    }
-
-    private void goTo(Class<? extends Component> navigationTarget) {
-        getUI().ifPresent(ui -> ui.navigate(navigationTarget));
+        add(new ExerciseButton(), new WorkoutButton());
     }
 }
