@@ -13,6 +13,9 @@ A a user
 I want to create/update/delete workout
 
 As a user
+I want to generate a random workout session
+
+As a user
 I want to see a list of primary exercises
 so that I can update my 5RM
 
