@@ -35,6 +35,7 @@ public class WorkoutView extends VerticalLayout implements HasUrlParameter<Long>
         HorizontalLayout toolbar = setupToolbar();
         add(toolbar);
         add(new Label(workout.getName()));
+        add(new Label("" + workout.getWeeks().size()));
 
     }
 

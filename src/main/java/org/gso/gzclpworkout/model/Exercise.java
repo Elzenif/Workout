@@ -1,5 +1,6 @@
 package org.gso.gzclpworkout.model;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -28,14 +29,18 @@ import java.io.Serializable;
 @Table(name = "exercise", uniqueConstraints = @UniqueConstraint(name = "UK_exercise__name", columnNames = "name"))
 public class Exercise implements Serializable {
 
+    @Setter(AccessLevel.PRIVATE)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NonNull
     @Column(nullable = false)
     private String name;
+
     @Enumerated(EnumType.STRING)
     private Category category;
+
     private String description;
 
 }
